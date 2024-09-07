@@ -1,15 +1,24 @@
 import React from 'react';
+import DropdownSelector from './DropdownSelector';
 
-const VillainPositionSelector = ({ userPos, onSelect, action }) => {
-  const positions = ['UTG', 'UTG+1', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
-  
-  // Filter villain positions based on the action
+const VillainPositionSelector = ({ userPos, onSelect, currentValue, action }) => {
+  const positions = [
+    { value: 'UTG', label: 'UTG' },
+    { value: 'UTG+1', label: 'UTG+1' },
+    { value: 'LJ', label: 'LJ' },
+    { value: 'HJ', label: 'HJ' },
+    { value: 'CO', label: 'CO' },
+    { value: 'BTN', label: 'BTN' },
+    { value: 'SB', label: 'SB' },
+    { value: 'BB', label: 'BB' }
+  ];
+
   const filterVillainPositions = () => {
-    const userIndex = positions.indexOf(userPos);
+    const userIndex = positions.findIndex(pos => pos.value === userPos);
     if (action === 'vsRfi') {
-      return positions.slice(0, userIndex); // Positions before user
+      return positions.slice(0, userIndex); // Positions before user for vsRfi
     } else if (action === 'rfiVs3bet') {
-      return positions.slice(userIndex + 1); // Positions after user
+      return positions.slice(userIndex + 1); // Positions after user for rfiVs3bet
     }
     return [];
   };
@@ -17,17 +26,12 @@ const VillainPositionSelector = ({ userPos, onSelect, action }) => {
   const availablePositions = filterVillainPositions();
 
   return (
-    <div>
-      <label>Select Villain Position:</label>
-      <select onChange={(e) => onSelect(e.target.value)}>
-        <option value="">Select Position</option>
-        {availablePositions.map((pos) => (
-          <option key={pos} value={pos}>
-            {pos}
-          </option>
-        ))}
-      </select>
-    </div>
+    <DropdownSelector
+      label="Select Villain Position"
+      options={availablePositions}
+      currentValue={currentValue}  // Pass currentValue to DropdownSelector
+      onSelect={onSelect}  // Ensure this calls the onSelect from App
+    />
   );
 };
 

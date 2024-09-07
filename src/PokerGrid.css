@@ -25,6 +25,10 @@
   background-color: gray;
 }
 
+.allin {
+  background-color: red;
+}
+
 /* Gradient backgrounds for split actions */
 .raise-fold {
   background: linear-gradient(to right, orange 50%, gray 50%);

@@ -32,6 +32,8 @@ const PokerGrid = ({ actionData }) => {
         return 'raise-call';
       case 'call/fold':
         return 'call-fold';
+        case 'allin':
+          return 'allin';  
       default:
         return 'fold'; // Default to gray/fold
     }

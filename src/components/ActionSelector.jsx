@@ -1,25 +1,59 @@
+// import React from 'react';
+// import DropdownSelector from './DropdownSelector';
+
+// const ActionSelector = ({ actions, onSelect, currentAction }) => {
+//   // Mapping between internal values and display labels
+//   const actionLabels = {
+//     rfi: 'RFI',
+//     vsRfi: 'vs RFI',
+//     rfiVs3bet: 'RFI vs 3bet'
+//   };
+
+//   // Map action values to a user-friendly label for display
+//   const options = actions.map(action => ({
+//     value: action,
+//     label: actionLabels[action] || action,
+//   }));
+
+//   return (
+//     <DropdownSelector
+//       label="Select Action"
+//       options={options}
+//       currentValue={currentAction}
+//       onSelect={onSelect}
+//     />
+//   );
+// };
+
+// export default ActionSelector;
+
 import React from 'react';
+import DropdownSelector from './DropdownSelector';
 
 const ActionSelector = ({ actions, onSelect, currentAction }) => {
+  console.log('ActionSelector Actions:', actions);  // Add this line to log the available actions
   // Mapping between internal values and display labels
   const actionLabels = {
     rfi: 'RFI',
     vsRfi: 'vs RFI',
-    rfiVs3bet: 'RFI vs 3bet'
+    rfiVs3bet: 'RFI vs 3bet',
+    vsSbLimp: 'vs SB Limp',  // New action label
+    vsOpenJam: 'vs Open Jam'  // New action label
   };
 
+  // Map action values to a user-friendly label for display
+  const options = actions.map(action => ({
+    value: action,
+    label: actionLabels[action] || action,
+  }));
+
   return (
-    <div>
-      <label>Select Action:</label>
-      <select value={currentAction || ''} onChange={(e) => onSelect(e.target.value)}>
-        <option value="">Select an action</option>
-        {actions.map((action) => (
-          <option key={action} value={action}>
-            {actionLabels[action] || action} {/* Use friendly label */}
-          </option>
-        ))}
-      </select>
-    </div>
+    <DropdownSelector
+      label="Select Action"
+      options={options}
+      currentValue={currentAction}
+      onSelect={onSelect}
+    />
   );
 };
 
