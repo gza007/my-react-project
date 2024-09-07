@@ -1,7 +1,6 @@
 import React from 'react';
 import '../PokerGrid.css'; // We'll define the CSS styles here
 
-// Props include the `actionData` (e.g., RFI data) passed from a parent component
 const PokerGrid = ({ actionData }) => {
   const handMatrix = [
     ['AA', 'AKs', 'AQs', 'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s'],
@@ -19,13 +18,23 @@ const PokerGrid = ({ actionData }) => {
     ['A2o', 'K2o', 'Q2o', 'J2o', 'T2o', '92o', '82o', '72o', '62o', '52o', '42o', '32o', '22'],
   ];
 
-  const getCellColor = (action) => {
-    if (!action) return 'gray'; // Default if action is not defined
-    if (action === 'raise') return 'orange';
-    if (action === 'call') return 'green';
-    if (action === 'fold') return 'gray';
-    if (action.includes('raise/fold')) return 'orange'; // Half orange and half red if raise/fold
-    return 'gray';
+  const getCellClass = (action) => {
+    switch (action) {
+      case 'raise':
+        return 'raise';
+      case 'call':
+        return 'call';
+      case 'fold':
+        return 'fold';
+      case 'raise/fold':
+        return 'raise-fold';
+      case 'raise/call':
+        return 'raise-call';
+      case 'call/fold':
+        return 'call-fold';
+      default:
+        return 'fold'; // Default to gray/fold
+    }
   };
 
   // Check if actionData exists and is valid
@@ -39,9 +48,9 @@ const PokerGrid = ({ actionData }) => {
       <tr key={rowIndex}>
         {row.map((hand) => {
           const action = actionData[hand];
-          const cellColor = getCellColor(action);
+          const cellClass = getCellClass(action);
           return (
-            <td key={hand} style={{ backgroundColor: cellColor }}>
+            <td key={hand} className={cellClass}>
               {hand}
             </td>
           );
