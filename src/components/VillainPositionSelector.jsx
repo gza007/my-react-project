@@ -15,7 +15,7 @@ const VillainPositionSelector = ({ userPos, onSelect, currentValue, action }) =>
 
   const filterVillainPositions = () => {
     const userIndex = positions.findIndex(pos => pos.value === userPos);
-    if (action === 'vsRfi') {
+    if (action === 'vsRfi' || action === 'vsOpenJam') {
       return positions.slice(0, userIndex); // Positions before user for vsRfi
     } else if (action === 'rfiVs3bet') {
       return positions.slice(userIndex + 1); // Positions after user for rfiVs3bet

@@ -41,3 +41,7 @@
 .call-fold {
   background: linear-gradient(to right, green 50%, gray 50%);
 }
+
+.allin-fold {
+  background: linear-gradient(to right, red 50%, gray 50%);
+}

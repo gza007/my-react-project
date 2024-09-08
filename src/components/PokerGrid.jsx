@@ -2,6 +2,9 @@ import React from 'react';
 import '../PokerGrid.css'; // We'll define the CSS styles here
 
 const PokerGrid = ({ actionData }) => {
+
+  console.log('PokerGrid received action data:', actionData);
+
   const handMatrix = [
     ['AA', 'AKs', 'AQs', 'AJs', 'ATs', 'A9s', 'A8s', 'A7s', 'A6s', 'A5s', 'A4s', 'A3s', 'A2s'],
     ['AKo', 'KK', 'KQs', 'KJs', 'KTs', 'K9s', 'K8s', 'K7s', 'K6s', 'K5s', 'K4s', 'K3s', 'K2s'],
@@ -32,8 +35,10 @@ const PokerGrid = ({ actionData }) => {
         return 'raise-call';
       case 'call/fold':
         return 'call-fold';
-        case 'allin':
-          return 'allin';  
+      case 'allin/fold':
+        return 'allin-fold';
+      case 'allin':
+        return 'allin';
       default:
         return 'fold'; // Default to gray/fold
     }

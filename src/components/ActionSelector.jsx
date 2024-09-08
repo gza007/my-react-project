@@ -1,32 +1,3 @@
-// import React from 'react';
-// import DropdownSelector from './DropdownSelector';
-
-// const ActionSelector = ({ actions, onSelect, currentAction }) => {
-//   // Mapping between internal values and display labels
-//   const actionLabels = {
-//     rfi: 'RFI',
-//     vsRfi: 'vs RFI',
-//     rfiVs3bet: 'RFI vs 3bet'
-//   };
-
-//   // Map action values to a user-friendly label for display
-//   const options = actions.map(action => ({
-//     value: action,
-//     label: actionLabels[action] || action,
-//   }));
-
-//   return (
-//     <DropdownSelector
-//       label="Select Action"
-//       options={options}
-//       currentValue={currentAction}
-//       onSelect={onSelect}
-//     />
-//   );
-// };
-
-// export default ActionSelector;
-
 import React from 'react';
 import DropdownSelector from './DropdownSelector';
 
