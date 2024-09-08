@@ -176,60 +176,6 @@ function App() {
       }
     }, [currentAction, userPos, villainPos, currentStackDepth, sbAction]);
 
-  // return (
-  //   <div className="app-container">
-  //     <h1>GTO Pre-Flop Simplified Ranges</h1>
-  
-  //     {/* Flexbox container to position selectors on the right */}
-  //     <div className="content-container">
-        
-  //       {/* Grid Component */}
-  //       <div className="grid-container">
-  //         <PokerGrid actionData={actionData} />
-  //       </div>
-  
-  //       {/* Selector Component */}
-  //       <div className="selector-container">
-  //         <PositionSelector onSelect={handlePositionChange} currentPosition={userPos} />
-  
-  //         {/* Include 'vsOpenJam' to make the Villain Position Selector appear for 'vs Open Jam' */}
-  //         {(currentAction === 'vsRfi' || currentAction === 'vsOpenJam') && userPos !== 'UTG' || currentAction === 'rfiVs3bet' ? (
-  //           <VillainPositionSelector
-  //             userPos={userPos}
-  //             onSelect={handleVillainPositionChange}
-  //             currentValue={villainPos}  // Pass villainPos here
-  //             action={currentAction}
-  //           />
-  //         ) : null}
-  
-  //         {/* SB Action logic for different scenarios */}
-  //         {userPos === 'BB' && villainPos === 'SB' && (
-  //           <div>
-  //             <label>SB Action:</label>
-  
-  //             {/* Handle BB vs SB at 10BB for 'vs Open Jam' */}
-  //             {currentStackDepth === 10 && currentAction === 'vsOpenJam' ? (
-  //               <select value="All-in" disabled>
-  //                 <option value="All-in">All-in</option>
-  //               </select>
-  //             ) : (
-  //               <select onChange={(e) => handleSbActionChange(e.target.value)}>
-  //                 <option value="">Select SB Action</option>
-  //                 <option value="Raise">Raise</option>
-  //                 <option value="Limp">Limp</option>
-  //               </select>
-  //             )}
-  //           </div>
-  //         )}
-  
-  //         <StackDepthSelector onSelect={handleStackDepthChange} currentStackDepth={currentStackDepth} />
-  //         <ActionSelector onSelect={handleActionChange} actions={actions} currentAction={currentAction} />
-  //       </div>
-  
-  //     </div>
-  //   </div>
-  // );
-  
   return (
     <div className="app-container">
       <h1>GTO Pre-Flop Simplified Ranges</h1>

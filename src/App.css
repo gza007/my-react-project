@@ -5,36 +5,36 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh; /* Make sure the container takes up the full height of the viewport */
-  margin: 0; /* Remove margins */
-  padding: 0; /* Remove padding */
+  height: 100vh; 
+  margin: 0; 
+  padding: 0; 
   background-image: url('/assets/background.jpeg');
 }
 
 .content-container {
   display: flex;
-  align-items: flex-start; /* Align items to the top */
-  justify-content: center; /* Center the grid and selectors */
+  align-items: flex-start; 
+  justify-content: center;
   width: 100%;
-  max-width: 1200px; /* Limit the maximum width of the container */
-  margin-top: 50px; /* Add space between the title and the grid/selectors */
-  padding: 20px; /* Add some padding for internal spacing */
-  box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+  max-width: 1200px;
+  margin-top: 50px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Adjust the title */
 h1 {
   text-align: center;
-  margin: 20px 0; /* Add some vertical space around the title */
+  margin: 20px 0;
 }
 
 .grid-container {
   flex: 2;
   display: flex;
-  justify-content: center; /* Center the grid */
-  width: 100%; /* Ensure the grid container takes up full width */
-  max-width: 800px; /* Set a max width to the grid */
-  margin-right: 20px; /* Spacing between the grid and selectors */
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin-right: 20px;
 }
 
 .selector-container {
