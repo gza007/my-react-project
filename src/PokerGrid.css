@@ -1,20 +1,23 @@
 .poker-grid {
-  width: 100%;
+  width: auto;
+  margin: 0 auto; /* Center the grid */
   border-collapse: collapse;
 }
 
 .poker-grid td {
-  width: 50px;
-  height: 50px;
+  width: 40px; 
+  height: 40px;
   text-align: center;
+  padding: 0;
   vertical-align: middle;
   border: 1px solid black;
   font-weight: bold;
   color: white;
+  font-size: 14px;
 }
 
 .raise {
-  background-color: orange;
+  background-color: hsl(27, 100%, 50%);
 }
 
 .call {

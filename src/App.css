@@ -1,18 +1,57 @@
-table {
+/* Flexbox layout for the app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  border-collapse: collapse;
+  height: 100vh; /* Make sure the container takes up the full height of the viewport */
+  margin: 0; /* Remove margins */
+  padding: 0; /* Remove padding */
+  background-image: url('/assets/background.jpeg');
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.content-container {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  justify-content: center; /* Center the grid and selectors */
+  width: 100%;
+  max-width: 1200px; /* Limit the maximum width of the container */
+  margin-top: 50px; /* Add space between the title and the grid/selectors */
+  padding: 20px; /* Add some padding for internal spacing */
+  box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+}
+
+/* Adjust the title */
+h1 {
   text-align: center;
+  margin: 20px 0; /* Add some vertical space around the title */
 }
 
-th {
-  background-color: #f2f2f2;
+.grid-container {
+  flex: 2;
+  display: flex;
+  justify-content: center; /* Center the grid */
+  width: 100%; /* Ensure the grid container takes up full width */
+  max-width: 800px; /* Set a max width to the grid */
+  margin-right: 20px; /* Spacing between the grid and selectors */
 }
 
-td {
-  color: #000;
+.selector-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #777777;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selector-container select,
+.selector-container label {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
