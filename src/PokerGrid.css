@@ -21,11 +21,11 @@
 }
 
 .call {
-  background-color: green;
+  background-color: rgb(59, 168, 83);
 }
 
 .fold {
-  background-color: gray;
+  background-color: rgb(111, 111, 111);
 }
 
 .allin {
@@ -34,17 +34,17 @@
 
 /* Gradient backgrounds for split actions */
 .raise-fold {
-  background: linear-gradient(to right, orange 50%, gray 50%);
+  background: linear-gradient(to right, hsl(27, 100%, 50%) 50%, rgb(111, 111, 111) 50%);
 }
 
 .raise-call {
-  background: linear-gradient(to right, orange 50%, green 50%);
+  background: linear-gradient(to right, hsl(27, 100%, 50%) 50%, rgb(59, 168, 83) 50%);
 }
 
 .call-fold {
-  background: linear-gradient(to right, green 50%, gray 50%);
+  background: linear-gradient(to right, rgb(59, 168, 83) 50%, rgb(111, 111, 111) 50%);
 }
 
 .allin-fold {
-  background: linear-gradient(to right, red 50%, gray 50%);
+  background: linear-gradient(to right, red 50%, rgb(111, 111, 111) 50%);
 }

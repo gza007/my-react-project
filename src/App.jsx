@@ -178,7 +178,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>GTO Pre-Flop Simplified Ranges</h1>
+      <h1>G's GTO Pre-Flop Simplified Ranges</h1>
   
       {/* Flexbox container to position selectors on the right */}
       <div className="content-container">

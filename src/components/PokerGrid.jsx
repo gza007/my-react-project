@@ -1,5 +1,5 @@
 import React from 'react';
-import '../PokerGrid.css'; // We'll define the CSS styles here
+import '../PokerGrid.css';
 
 const PokerGrid = ({ actionData }) => {
 
@@ -23,21 +23,21 @@ const PokerGrid = ({ actionData }) => {
 
   const getCellClass = (action) => {
     switch (action) {
-      case 'raise':
+      case 'r':
         return 'raise';
-      case 'call':
+      case 'c':
         return 'call';
-      case 'fold':
+      case 'f':
         return 'fold';
-      case 'raise/fold':
+      case 'r/f':
         return 'raise-fold';
-      case 'raise/call':
+      case 'r/c':
         return 'raise-call';
-      case 'call/fold':
+      case 'c/f':
         return 'call-fold';
-      case 'allin/fold':
+      case 'a/f':
         return 'allin-fold';
-      case 'allin':
+      case 'a':
         return 'allin';
       default:
         return 'fold'; // Default to gray/fold
