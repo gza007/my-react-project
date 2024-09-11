@@ -178,16 +178,29 @@ function App() {
     }, [currentAction, userPos, villainPos, currentStackDepth, sbAction]);
 
     const getChartTitle = (userPos, currentAction, currentStackDepth, villainPos = null) => {
-      let title = `${userPos}`;
+      // Initialize title to an empty string
+      let title = '';
+    
+      // Ensure that required values are provided before generating the title
+      if (!userPos || !currentAction || !currentStackDepth) {
+        return title; // Return empty string if any required values are missing
+      }
+    
+      // Construct the title based on the currentAction and the positions involved
+      title = `${userPos}`;
     
       if (currentAction === 'rfi') {
         title += ` RFI (${currentStackDepth}BB)`;
-      } else if (currentAction === 'vsRfi') {
-        title += ` vs ${villainPos} RFI (${currentStackDepth}BB)`;
+      } else if (currentAction === 'vsRfi' && sbAction === "Raise") {
+        title += ` vs ${villainPos} Raise (${currentStackDepth}BB)`;
+      } else if (currentAction === 'vsRfi' && sbAction === "Limp") {
+        title += ` vs ${villainPos} Limp (${currentStackDepth}BB)`;
       } else if (currentAction === 'rfiVs3bet') {
+        title += ` vs ${villainPos} RFI (${currentStackDepth}BB)`;
+      } else if (currentAction === 'vsRfi') {
         title += ` vs ${villainPos} 3Bet (${currentStackDepth}BB)`;
       } else if (currentAction === 'vsOpenJam') {
-        title += ` vs ${villainPos} Open Jam (${currentStackDepth}BB)`;
+        title += ` vs ${villainPos} All-in (${currentStackDepth}BB)`;
       } else if (currentAction === 'vsSbLimp') {
         title += ` vs ${villainPos} SB Limp (${currentStackDepth}BB)`;
       }
@@ -197,256 +210,74 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>G's GTO Pre-Flop Simplified Ranges</h1>
+      <h1>Interactive GTO Pre-Flop Poker Chart</h1>
 
-      {/* Dynamically generated chart title */}
-    <h2>{getChartTitle(userPos, currentAction, currentStackDepth, villainPos)}</h2>
-  
       {/* Flexbox container to position selectors on the right */}
       <div className="content-container">
-  
-        {/* Grid Component */}
-        <div className="grid-container">
-          <PokerGrid actionData={actionData} />
+
+         {/* New wrapper to contain both grid and selectors */}
+         <div className="main-content">
+
+       <div className="grid-section">
+        {userPos && currentAction && currentStackDepth && actionData && Object.keys(actionData).length > 0 && (
+        <h2 className="chart-title">
+        {getChartTitle(userPos, currentAction, currentStackDepth, villainPos)}
+        </h2>
+      )}
+     
+
+
+      {/* Grid Wrapper */}
+      <div className="grid-wrapper">
+
+      {/* Grid Component */}
+      <div className="grid-container">
+      <PokerGrid actionData={actionData} />
         </div>
-  
-        {/* Selector Component */}
-        <div className="selector-container">
-          <PositionSelector onSelect={handlePositionChange} currentPosition={userPos} />
-  
-          {/* Include 'vsOpenJam' to make the Villain Position Selector appear for 'vs Open Jam' */}
-          {(currentAction === 'vsRfi' || currentAction === 'vsOpenJam') && userPos !== 'UTG' || currentAction === 'rfiVs3bet' ? (
-            <VillainPositionSelector
-              userPos={userPos}
-              onSelect={handleVillainPositionChange}
-              currentValue={villainPos}  // Pass villainPos here
-              action={currentAction}
-            />
-          ) : null}
-  
-          {/* SB Action logic for different scenarios */}
-          {userPos === 'BB' && villainPos === 'SB' && (
-            <div>
-              <label>SB Action:</label>
-  
-              {/* Handle BB vs SB at 10BB for 'vs Open Jam' */}
-              {currentStackDepth === 10 && currentAction === 'vsOpenJam' ? (
-                <select value="All-in" disabled>
-                  <option value="All-in">All-in</option>
-                </select>
-              ) : (
-                <select onChange={(e) => handleSbActionChange(e.target.value)}>
-                  <option value="">Select SB Action</option>
-                  <option value="Raise">Raise</option>
-                  <option value="Limp">Limp</option>
-                </select>
-              )}
-            </div>
-          )}
-  
-          <StackDepthSelector onSelect={handleStackDepthChange} currentStackDepth={currentStackDepth} />
-          <ActionSelector onSelect={handleActionChange} actions={actions} currentAction={currentAction} />
-        </div>
-  
       </div>
     </div>
-  );
+
+      {/* Selector Component */}
+      <div className="selector-container">
+        <PositionSelector onSelect={handlePositionChange} currentPosition={userPos} />
+        <StackDepthSelector onSelect={handleStackDepthChange} currentStackDepth={currentStackDepth} />
+        <ActionSelector onSelect={handleActionChange} actions={actions} currentAction={currentAction} />
   
-    
+      {/* Include 'vsOpenJam' to make the Villain Position Selector appear for 'vs Open Jam' */}
+      {(currentAction === 'vsRfi' || currentAction === 'vsOpenJam') && userPos !== 'UTG' || currentAction === 'rfiVs3bet' ? (
+        <VillainPositionSelector
+          userPos={userPos}
+          onSelect={handleVillainPositionChange}
+          currentValue={villainPos}  // Pass villainPos here
+          action={currentAction}
+        />
+      ) : null}
+  
+      {/* SB Action logic for different scenarios */}
+      {userPos === 'BB' && villainPos === 'SB' && (
+        <div>
+          <label>SB Action:</label>
+
+          {/* Handle BB vs SB at 10BB for 'vs Open Jam' */}
+          {currentStackDepth === 10 && currentAction === 'vsOpenJam' ? (
+            <select value="All-in" disabled>
+              <option value="All-in">All-in</option>
+            </select>
+          ) : (
+            <select onChange={(e) => handleSbActionChange(e.target.value)}>
+              <option value="">Select SB Action</option>
+              <option value="Raise">Raise</option>
+              <option value="Limp">Limp</option>
+            </select>
+          )}
+        </div>
+      )}
+  
+          </div> 
+        </div>
+      </div>
+    </div>
+    );
   }
   
   export default App;
-
-// function App() {
-//   const [currentAction, setCurrentAction] = useState(''); // Track selected action
-//   const [userPos, setUserPos] = useState(''); // Track user position
-//   const [villainPos, setVillainPos] = useState(null); // Track villain position
-//   const [currentStackDepth, setCurrentStackDepth] = useState(60); // Track stack depth
-//   const [actions, setActions] = useState([]); // Available actions
-//   const [actionData, setActionData] = useState({}); // Data passed to PokerGrid
-//   const [sbAction, setSbAction] = useState(null); // SB Raise or SB Limp for BB response
-
-//   useEffect(() => {
-//     // Reset action and other related states whenever position or stack depth changes
-//     resetState(); // Make sure all is reset
-//     if (userPos) updateAvailableActions(userPos); // Update available actions based on user position
-//   }, [userPos, currentStackDepth]);
-
-//   const resetState = () => {
-//     setCurrentAction('');
-//     setVillainPos(null); // Reset villain position
-//     setSbAction(null); // Reset SB action for BB
-//     setActionData({}); // Reset action data for grid
-//   };
-
-//   const updateAvailableActions = (userPos) => {
-//     const posIndex = positions.indexOf(userPos);
-  
-//     console.log(`Updating actions for Stack Depth = ${currentStackDepth}, User Position = ${userPos}`);
-  
-//     if (currentStackDepth === 10) {
-//       console.log("10BB Stack Detected");
-  
-//       // For UTG, only RFI is available
-//       if (userPos === 'UTG') {
-//         console.log("Position is UTG at 10BB, setting actions to ['rfi']");
-//         setActions(['rfi']);  
-//       }
-//       // For BB, vs Open Jam and vs SB Limp are available
-//       else if (userPos === 'BB') {
-//         console.log("Position is BB at 10BB, setting actions to ['vsOpenJam', 'vsSbLimp']");
-//         setActions(['vsOpenJam', 'vsSbLimp']);
-//       }
-//       // For all other positions, RFI or vs Open Jam are available
-//       else {
-//         console.log("Other position at 10BB, setting actions to ['rfi', 'vsOpenJam']");
-//         setActions(['rfi', 'vsOpenJam']);
-//       }
-//     } else {
-//       // Existing logic for other stack depths
-//       if (userPos === 'BB') {
-//         setActions(['vsRfi']);
-//       } else if (posIndex === 0) {
-//         setActions(['rfi', 'rfiVs3bet']);
-//       } else {
-//         setActions(['rfi', 'vsRfi', 'rfiVs3bet']);
-//       }
-//     }
-//   };
-  
-//   const handlePositionChange = (position) => {
-//     console.log(`User position changed to: ${position}`);
-//     setUserPos(position);  // Update state
-//   };
-
-//   const handleVillainPositionChange = (position) => {
-//     console.log(`Villain position changed to: ${position}`);
-//     setVillainPos(position);
-//   };
-
-//   const handleActionChange = (action) => {
-//     console.log(`Action changed to: ${action}`);
-//     setCurrentAction(action);
-//   };
-
-//   const handleStackDepthChange = (depth) => {
-//     console.log(`Stack depth changed to: ${depth}`);
-//     setCurrentStackDepth(Number(depth)); // Ensure depth is a number
-//   };
-  
-
-//   const handleSbActionChange = (action) => {
-//     console.log(`SB Action changed to: ${action}`);
-//     setSbAction(action);
-//   };
-
-//   useEffect(() => {
-//     console.log(`User Position: ${userPos}, Stack Depth: ${currentStackDepth}, Current Action: ${currentAction}`);
-  
-//     if (currentAction && userPos && currentStackDepth) {
-//       const actionType = currentAction === 'vsOpenJam' ? 'vsRfi' : currentAction;
-//       const stackDataFile = stackDepthDataMap[currentStackDepth];
-  
-//       console.log(`Using stack depth ${currentStackDepth} data, action: ${actionType}`);
-//       console.log('Data being pulled from:', stackDataFile);
-  
-//       const stackData = stackDataFile[actionType];
-  
-//       if (!stackData || !userPos) {
-//         console.log('No action data available or user position not set.');
-//         setActionData({});
-//         return;
-//       }
-  
-//       // Log the stack data for the current user position
-//       console.log('Stack Data for current user position:', stackData[userPos]);
-  
-//       let posActionData;
-  
-//       if (currentAction === 'rfi') {
-//         posActionData = stackData[userPos];
-//       } else if (currentAction === 'vsRfi' || currentAction === 'vsOpenJam') {
-//         if (!villainPos) {
-//           console.log('No villain position set for vsRFI or vsOpenJam action.');
-//           setActionData({});
-//           return;
-//         }
-  
-//         if (userPos === 'BB' && villainPos === 'SB') {
-//           if (currentStackDepth === 10 && currentAction === 'vsOpenJam') {
-//             setSbAction('All-in');
-//             posActionData = stackData[userPos]?.[villainPos]?.['Raise'];
-//           } else if (sbAction) {
-//             posActionData = stackData[userPos]?.[villainPos]?.[sbAction];
-//           }
-//         } else {
-//           posActionData = stackData[userPos]?.[villainPos];
-//         }
-//       } else if (currentAction === 'rfiVs3bet') {
-//         posActionData = stackData[userPos]?.[villainPos];
-//       }
-  
-//       console.log('Final position-based action data:', posActionData);
-  
-//       setActionData(posActionData || {});  // Set the action data for PokerGrid
-//     }
-//   }, [currentAction, userPos, villainPos, currentStackDepth, sbAction]);
-  
-  
-
-// return (
-//   <div className="app-container">
-//     <h1>G's GTO Pre-Flop Simplified Ranges</h1>
-
-//     {/* Flexbox container to position selectors on the right */}
-//     <div className="content-container">
-
-//       {/* Grid Component */}
-//       <div className="grid-container">
-//         <PokerGrid actionData={actionData} />
-//       </div>
-
-//       {/* Selector Component */}
-//       <div className="selector-container">
-//         <PositionSelector onSelect={handlePositionChange} currentPosition={userPos} />
-
-//         {/* Include 'vsOpenJam' to make the Villain Position Selector appear for 'vs Open Jam' */}
-//         {(currentAction === 'vsRfi' || currentAction === 'vsOpenJam') && userPos !== 'UTG' || currentAction === 'rfiVs3bet' ? (
-//           <VillainPositionSelector
-//             userPos={userPos}
-//             onSelect={handleVillainPositionChange}
-//             currentValue={villainPos}  // Pass villainPos here
-//             action={currentAction}
-//           />
-//         ) : null}
-
-//         {/* SB Action logic for different scenarios */}
-//         {userPos === 'BB' && villainPos === 'SB' && (
-//           <div>
-//             <label>SB Action:</label>
-
-//             {/* Handle BB vs SB at 10BB for 'vs Open Jam' */}
-//             {currentStackDepth === 10 && currentAction === 'vsOpenJam' ? (
-//               <select value="All-in" disabled>
-//                 <option value="All-in">All-in</option>
-//               </select>
-//             ) : (
-//               <select onChange={(e) => handleSbActionChange(e.target.value)}>
-//                 <option value="">Select SB Action</option>
-//                 <option value="Raise">Raise</option>
-//                 <option value="Limp">Limp</option>
-//               </select>
-//             )}
-//           </div>
-//         )}
-
-//         <StackDepthSelector onSelect={handleStackDepthChange} currentStackDepth={currentStackDepth} />
-//         <ActionSelector onSelect={handleActionChange} actions={actions} currentAction={currentAction} />
-//       </div>
-
-//     </div>
-//   </div>
-// );
-// }
-
-// export default App;

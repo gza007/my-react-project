@@ -3,49 +3,92 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;  /* No vertical centering */
   width: 100%;
-  height: 100vh; 
-  margin: 0; 
-  padding: 0; 
+  height: auto;  /* Let height grow with content */
+  margin: 0;
+  padding: 0;
   background-image: url('/assets/background.jpeg');
 }
 
 .content-container {
   display: flex;
-  align-items: flex-start; 
   justify-content: center;
+  align-items: flex-start;
   width: 100%;
   max-width: 1200px;
-  margin-top: 50px;
+  margin-top: 20px; /* Add some space from the title */
   padding: 20px;
-  box-sizing: border-box;
+  gap: 20px;
 }
 
-/* Adjust the title */
-h1 {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.grid-container {
-  flex: 2;
+.main-content {
   display: flex;
   justify-content: center;
+  align-items: flex-start; /* Align the tops of the grid and selector */
   width: 100%;
+  max-width: 1200px;
+}
+
+.grid-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Center the title and grid together */
   max-width: 800px;
+  margin-right: 20px;  /* Space between grid and selector */
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: center; /* Center the title in the available space */
+  width: 100%;
+}
+
+/* Title centered above the grid */
+.chart-title {
+  font-size: 25px;
+  font-weight: bold;
+  background-color: rgba(111, 111, 111, 0.8);
+  border-radius: 8px;
+  padding: 10px 20px;
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  display: block;
+}
+
+/* Grid wrapper */
+.grid-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   margin-right: 20px;
 }
 
+/* Grid container */
+.grid-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 0px;
+  box-sizing: border-box;
+}
+
+/* Selector container */
 .selector-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
-  background-color: #777777;
+  background-color: rgba(111, 111, 111, 0.8);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  align-self: flex-start;
+  margin-top: 20px;
 }
 
 .selector-container select,
@@ -54,4 +97,10 @@ h1 {
   padding: 10px;
   margin-bottom: 10px;
   font-size: 16px;
+}
+
+/* Optional: Adjust the h1 title at the top */
+h1 {
+  text-align: center;
+  margin: 20px 0;
 }
