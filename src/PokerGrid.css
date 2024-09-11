@@ -48,3 +48,30 @@
 .allin-fold {
   background: linear-gradient(to right, red 50%, rgb(111, 111, 111) 50%);
 }
+
+.chart-key {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;  /* Space between the key items */
+}
+
+.key-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #333;  /* Default background color */
+  text-align: center;
+}
+
+.key-label {
+  margin-right: 5px;
+}
+
+.key-percentage {
+  font-size: 0.9em;
+}

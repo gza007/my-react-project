@@ -47,6 +47,16 @@ function App() {
     const [actionData, setActionData] = useState({}); // Data passed to PokerGrid
     const [sbAction, setSbAction] = useState(null); // SB Raise or SB Limp for BB response
   
+      // New function to handle setting actionData safely
+    const handleSetActionData = (data) => {
+      if (!data || !data["action%"]) {
+        console.log("No 'action%' data available");
+        setActionData({}); // Ensure empty object is passed to PokerGrid if data is missing
+        return;
+      }
+      setActionData(data);
+    };
+
     useEffect(() => {
       // Reset action and other related states whenever position or stack depth changes
       resetState(); // Make sure all is reset

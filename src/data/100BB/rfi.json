@@ -1,5 +1,11 @@
 {
 "UTG": {
+  "action%": {
+    "Raise%": "2.5bb 14.72%",
+    "Fold%": "Fold 85.3%",
+    "Call%": "0",
+    "Allin%": "0"
+  },
     "AA": "r",
     "AKs": "r",
     "AQs": "r",
