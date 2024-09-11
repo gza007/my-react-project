@@ -74,12 +74,6 @@ const keyBoxWidth = validActions.length ? (100 / validActions.length) + "%" : "0
     ));
   };
 
-//   return (
-//     <table className="poker-grid">
-//       <tbody>{renderGrid()}</tbody>
-//     </table>
-//   );
-// }
 
 return (
   <div className="grid-wrapper">
