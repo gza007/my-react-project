@@ -104,3 +104,32 @@ h1 {
   text-align: center;
   margin: 20px 0;
 }
+
+/* App.css */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.custom-button {
+  padding: 10px 15px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #555;
+}
+
+.custom-button.active {
+  background-color: #f60;
+}
+
+.custom-button:disabled {
+  background-color: #888;
+}

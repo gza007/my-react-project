@@ -1,30 +1,45 @@
+// ActionSelector.jsx
 import React from 'react';
-import DropdownSelector from './DropdownSelector';
+import Button from './Button';
 
-const ActionSelector = ({ actions, onSelect, currentAction }) => {
-  console.log('ActionSelector Actions:', actions);  // Add this line to log the available actions
-  // Mapping between internal values and display labels
-  const actionLabels = {
-    rfi: 'RFI',
-    vsRfi: 'vs RFI',
-    rfiVs3bet: 'RFI vs 3bet',
-    vsSbLimp: 'vs SB Limp',  // New action label
-    vsOpenJam: 'vs Open Jam'  // New action label
+const ActionSelector = ({ onSelect, currentAction, userPos, stackDepth }) => {
+  const actions = [
+    { value: 'rfi', label: 'RFI' },
+    { value: 'vsRfi', label: 'vs RFI' },
+    { value: 'rfiVs3bet', label: 'RFI vs 3bet' },
+    { value: 'vsOpenJam', label: 'vs All-in' },
+    { value: 'vsSbLimp', label: 'vs SB Limp' },
+    { value: 'vsSbRaise', label: 'vs SB Raise' }
+  ];
+
+  const isActionDisabled = (action) => {
+    if (stackDepth === 10) {
+      if (userPos === 'UTG' && action !== 'rfi') return true;
+      if (userPos === 'BB' && !['vsOpenJam', 'vsSbLimp'].includes(action)) return true;
+      if (userPos !== 'BB' && !['rfi', 'vsOpenJam'].includes(action)) return true;
+    } else {
+      if (userPos === 'BB' && action !== 'vsRfi') return true;
+      if (userPos === 'UTG' && !['rfi', 'rfiVs3bet'].includes(action)) return true;
+      if (userPos !== 'BB' && userPos !== 'UTG' && !['rfi', 'vsRfi', 'rfiVs3bet'].includes(action)) return true;
+    }
+    return false;
   };
 
-  // Map action values to a user-friendly label for display
-  const options = actions.map(action => ({
-    value: action,
-    label: actionLabels[action] || action,
-  }));
-
   return (
-    <DropdownSelector
-      label="Select Action"
-      options={options}
-      currentValue={currentAction}
-      onSelect={onSelect}
-    />
+    <div className="selector-container">
+      <h3>Select Action</h3>
+      <div className="button-group">
+        {actions.map(({ value, label }) => (
+          <Button
+            key={value}
+            label={label}
+            onClick={() => onSelect(value)}
+            isActive={currentAction === value}
+            disabled={isActionDisabled(value)}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 

@@ -1,37 +1,52 @@
-import React from 'react';
-import DropdownSelector from './DropdownSelector';
+import React, { useEffect } from 'react';
+import Button from './Button';
 
-const VillainPositionSelector = ({ userPos, onSelect, currentValue, action }) => {
-  const positions = [
-    { value: 'UTG', label: 'UTG' },
-    { value: 'UTG+1', label: 'UTG+1' },
-    { value: 'LJ', label: 'LJ' },
-    { value: 'HJ', label: 'HJ' },
-    { value: 'CO', label: 'CO' },
-    { value: 'BTN', label: 'BTN' },
-    { value: 'SB', label: 'SB' },
-    { value: 'BB', label: 'BB' }
-  ];
+const VillainPositionSelector = ({ userPos, onSelect, currentValue, action, stackDepth }) => {
+  const positions = ['UTG', 'UTG+1', 'LJ', 'HJ', 'CO', 'BTN', 'SB', 'BB'];
 
-  const filterVillainPositions = () => {
-    const userIndex = positions.findIndex(pos => pos.value === userPos);
-    if (action === 'vsRfi' || action === 'vsOpenJam') {
-      return positions.slice(0, userIndex); // Positions before user for vsRfi
-    } else if (action === 'rfiVs3bet') {
-      return positions.slice(userIndex + 1); // Positions after user for rfiVs3bet
+  useEffect(() => {
+    if (stackDepth === 10 && userPos === 'BB' && action === 'vsSbLimp') {
+      onSelect('SB');
     }
-    return [];
+  }, [stackDepth, userPos, action, onSelect]);
+
+  const isPositionDisabled = (position) => {
+    const userIndex = positions.indexOf(userPos);
+    const posIndex = positions.indexOf(position);
+
+    if (!action || !userPos) {
+      return true; // Disable all if no action or user position is selected
+    }
+
+    if (stackDepth === 10 && userPos === 'BB' && action === 'vsSbLimp') {
+      return position !== 'SB';
+    }
+
+    if (action === 'vsRfi' || action === 'vsOpenJam') {
+      return posIndex >= userIndex;
+    } else if (action === 'rfiVs3bet') {
+      return posIndex <= userIndex;
+    }
+
+    return true; // Disable all if no relevant action is selected
   };
 
-  const availablePositions = filterVillainPositions();
-
   return (
-    <DropdownSelector
-      label="Select Villain's Position"
-      options={availablePositions}
-      currentValue={currentValue}  // Pass currentValue to DropdownSelector
-      onSelect={onSelect}  // Ensure this calls the onSelect from App
-    />
+    <div className="selector-container">
+      <h3>Select Villain's Position</h3>
+      <div className="button-group">
+        {positions.map((position) => (
+          <Button
+            key={position}
+            label={position}
+            onClick={() => onSelect(position)}
+            isActive={currentValue === position}
+            disabled={isPositionDisabled(position)}
+            //stackDepth={currentStackDepth}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
