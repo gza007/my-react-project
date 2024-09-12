@@ -87,7 +87,6 @@ return (
         <div className="chart-key">
           {validActions.map(([key, value], index) => (
             <div key={index} className="key-item" style={{ width: keyBoxWidth }}>
-              <span className="key-label">{key.replace('%', '')}</span>
               <span className="key-percentage">{value}</span>
             </div>
           ))}
