@@ -44,19 +44,19 @@ const PokerGrid = ({ actionData }) => {
     }
   };
 
-// Step 1: Check if actionData exists
-const { "action%": actionPercentages = null, ...hands } = actionData || {};
+// // Step 1: Check if actionData exists
+// const { "action%": actionPercentages = null, ...hands } = actionData || {};
 
-// If actionData is missing, default to empty actions (grey hands)
-const isActionDataAvailable = Object.keys(actionData || {}).length > 0;
+// // If actionData is missing, default to empty actions (grey hands)
+// const isActionDataAvailable = Object.keys(actionData || {}).length > 0;
 
-// Step 2: Handle missing 'action%' and set valid actions
-const validActions = actionPercentages 
-  ? Object.entries(actionPercentages).filter(([key, value]) => value !== "0" && value)
-  : [];
+// // Step 2: Handle missing 'action%' and set valid actions
+// const validActions = actionPercentages 
+//   ? Object.entries(actionPercentages).filter(([key, value]) => value !== "0" && value)
+//   : [];
 
-// Step 3: Calculate width for each key item based on the number of valid actions
-const keyBoxWidth = validActions.length ? (100 / validActions.length) + "%" : "0%";
+// // Step 3: Calculate width for each key item based on the number of valid actions
+// const keyBoxWidth = validActions.length ? (100 / validActions.length) + "%" : "0%";
 
   const renderGrid = () => {
     return handMatrix.map((row, rowIndex) => (
@@ -77,21 +77,9 @@ const keyBoxWidth = validActions.length ? (100 / validActions.length) + "%" : "0
 
 return (
   <div className="grid-wrapper">
-    {/* The Poker Hand Grid */}
     <table className="poker-grid">
       <tbody>{renderGrid()}</tbody>
     </table>
-
- {/* Conditionally render the action key only if validActions exist */}
- {isActionDataAvailable && validActions.length > 0 ? (
-        <div className="chart-key">
-          {validActions.map(([key, value], index) => (
-            <div key={index} className="key-item" style={{ width: keyBoxWidth }}>
-              <span className="key-percentage">{value}</span>
-            </div>
-          ))}
-        </div>
-      ) : null}
     </div>
   );
 }

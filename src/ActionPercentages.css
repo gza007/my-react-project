@@ -1,0 +1,20 @@
+.action-percentages {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.action-percentage-box {
+  flex: 1;
+  background-color: #333;
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0 0.25rem;
+}
+
+.percentage {
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+}

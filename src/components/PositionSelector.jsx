@@ -8,7 +8,7 @@ const PositionSelector = ({ onSelect, currentPosition }) => {
   return (
     <div className="selector-container">
       <h3>Select Your Position</h3>
-      <div className="button-group">
+      <div className="button-grid">
         {positions.map((position) => (
           <Button
             key={position}

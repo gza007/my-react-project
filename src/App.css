@@ -1,129 +1,112 @@
-/* Flexbox layout for the app */
 .app-container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;  /* No vertical centering */
+  padding: 1rem;
+  background-color: #2c2c2c;
+}
+
+.header-buttons button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #3c3c3c;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.chart-title {
   width: 100%;
-  height: auto;  /* Let height grow with content */
-  margin: 0;
-  padding: 0;
-  background-image: url('/assets/background.jpeg');
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: #2c2c2c;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
 .content-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 20px; /* Add some space from the title */
-  padding: 20px;
-  gap: 20px;
+  gap: 2rem;
 }
 
-.main-content {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align the tops of the grid and selector */
-  width: 100%;
-  max-width: 1200px;
-}
-
-.grid-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;  /* Center the title and grid together */
-  max-width: 800px;
-  margin-right: 20px;  /* Space between grid and selector */
-}
-
-.title-wrapper {
-  display: flex;
-  justify-content: center; /* Center the title in the available space */
-  width: 100%;
-}
-
-/* Title centered above the grid */
-.chart-title {
-  font-size: 25px;
-  font-weight: bold;
-  background-color: rgba(111, 111, 111, 0.8);
-  border-radius: 8px;
-  padding: 10px 20px;
-  max-width: 400px;
-  text-align: center;
-  margin-bottom: 20px;
-  width: 100%;
-  display: block;
-}
-
-/* Grid wrapper */
-.grid-wrapper {
+.left-container {
+  flex: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  margin-right: 20px;
 }
 
-/* Grid container */
 .grid-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  padding-top: 0px;
-  box-sizing: border-box;
+  flex: 2;
 }
 
-/* Selector container */
+.selectors-container {
+  flex: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .selector-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  background-color: rgba(111, 111, 111, 0.8);
+  background-color: #2c2c2c;
+  padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  align-self: flex-start;
-  margin-top: 20px;
 }
 
-.selector-container select,
-.selector-container label {
+.selector-group {
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.access-all-button {
+  margin-top: 1rem;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-/* Optional: Adjust the h1 title at the top */
-h1 {
-  text-align: center;
-  margin: 20px 0;
-}
-
-/* App.css */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  padding: 0.5rem;
+  background-color: rgb(222, 187, 14);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .custom-button {
-  padding: 10px 15px;
-  background-color: #444;
+  padding: 0.5rem;
+  background-color: #888;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 0.9rem;
 }
 
 .custom-button:hover {
-  background-color: #555;
+  background-color: hsl(24, 91%, 66%);
 }
 
 .custom-button.active {
@@ -131,5 +114,6 @@ h1 {
 }
 
 .custom-button:disabled {
-  background-color: #888;
+  background-color: #555;
+  cursor: not-allowed;
 }
