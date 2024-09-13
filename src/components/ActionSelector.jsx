@@ -28,7 +28,7 @@ const ActionSelector = ({ onSelect, currentAction, userPos, stackDepth }) => {
   return (
     <div className="selector-container">
       <h3>Select Action</h3>
-      <div className="button-group">
+      <div className="button-grid">
         {actions.map(({ value, label }) => (
           <Button
             key={value}

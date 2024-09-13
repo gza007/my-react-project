@@ -177,6 +177,12 @@
     "22": "r/f"
 },
     "UTG+1": {
+      "action%": {
+        "Raise%": "2.5bb 16.72%",
+        "Fold%": "Fold 32.3%",
+        "Call%": "Call 50%",
+        "Allin%": "0"
+      },
       "AA": "r",
       "AKs": "r",
       "AQs": "r",
@@ -348,6 +354,12 @@
       "22": "r/f"
       },
     "LJ": {
+      "action%": {
+        "Allin%": "All-in 24%",
+        "Raise%": "2.5bb 56.72%",
+        "Call%": "Call 10%",
+        "Fold%": "Fold 12.3%"
+      },
         "AA": "r",
         "AKs": "r",
         "AQs": "r",

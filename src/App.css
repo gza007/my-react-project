@@ -1,129 +1,132 @@
-/* Flexbox layout for the app */
 .app-container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;  /* No vertical centering */
-  width: 100%;
-  height: auto;  /* Let height grow with content */
-  margin: 0;
-  padding: 0;
-  background-image: url('/assets/background.jpeg');
+  padding: 0.5rem 1rem;
+  background-color: #2c2c2c;
+}
+
+h1 {
+  font-size: 1.1rem; /* Reduced font size */
+  margin: 0; /* Remove default margin */
+}
+
+.header-buttons button {
+  margin-left: 0.5rem; /* Slightly reduced margin */
+  padding: 0.3rem 0.8rem; /* Reduced padding */
+  background-color: #3c3c3c;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem; /* Slightly reduced font size */
+  font-weight: bold;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .content-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 20px; /* Add some space from the title */
-  padding: 20px;
-  gap: 20px;
+  gap: 1rem;
 }
 
-.main-content {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align the tops of the grid and selector */
-  width: 100%;
-  max-width: 1200px;
-}
-
-.grid-section {
+.left-container {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;  /* Center the title and grid together */
-  max-width: 800px;
-  margin-right: 20px;  /* Space between grid and selector */
 }
 
-.title-wrapper {
-  display: flex;
-  justify-content: center; /* Center the title in the available space */
-  width: 100%;
-}
-
-/* Title centered above the grid */
 .chart-title {
-  font-size: 25px;
+  width: 100%;
+  height: 2.5rem; /* Set a fixed height */
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: #2c2c2c;
+  border-radius: 4px;
   font-weight: bold;
-  background-color: rgba(111, 111, 111, 0.8);
-  border-radius: 8px;
-  padding: 10px 20px;
-  max-width: 400px;
-  text-align: center;
-  margin-bottom: 20px;
-  width: 100%;
-  display: block;
-}
-
-/* Grid wrapper */
-.grid-wrapper {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  margin-right: 20px;
-}
-
-/* Grid container */
-.grid-container {
-  width: 100%;
-  display: flex;
   justify-content: center;
-  padding: 10px;
-  padding-top: 0px;
-  box-sizing: border-box;
 }
 
-/* Selector container */
-.selector-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  background-color: rgba(111, 111, 111, 0.8);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  align-self: flex-start;
-  margin-top: 20px;
-}
-
-.selector-container select,
-.selector-container label {
+.chart-title .placeholder {
+  display: inline-block;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
+  height: 100%;
 }
 
-/* Optional: Adjust the h1 title at the top */
-h1 {
-  text-align: center;
-  margin: 20px 0;
+
+.grid-container {
+  flex: 2;
 }
 
-/* App.css */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.selectors-container {
+  flex: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.selectors-container h3 {
+  margin-top: 0;
+}
+
+.selector-container {
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.selector-group {
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.access-all-button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: rgb(222, 187, 14);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .custom-button {
-  padding: 10px 15px;
-  background-color: #444;
+  padding: 0.5rem;
+  background-color: #888;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 0.9rem;
 }
 
 .custom-button:hover {
-  background-color: #555;
+  background-color: hsl(24, 91%, 66%);
 }
 
 .custom-button.active {
@@ -131,5 +134,6 @@ h1 {
 }
 
 .custom-button:disabled {
-  background-color: #888;
+  background-color: #555;
+  cursor: not-allowed;
 }

@@ -5,6 +5,7 @@ import PositionSelector from './components/PositionSelector';
 import VillainPositionSelector from './components/VillainPositionSelector';
 import StackDepthSelector from './components/StackDepthSelector';
 import ActionSelector from './components/ActionSelector';
+import ActionPercentages from './components/ActionPercentages';
 import rfi100 from './data/100BB/rfi.json';
 import rfiVs3bet100 from './data/100BB/rfiVs3bet100.json';
 import vsRfi100 from './data/100BB/vsRfi.json';
@@ -42,7 +43,7 @@ function App() {
     const [currentAction, setCurrentAction] = useState(''); // Track selected action
     const [userPos, setUserPos] = useState(''); // Track user position
     const [villainPos, setVillainPos] = useState(null); // Track villain position
-    const [currentStackDepth, setCurrentStackDepth] = useState(60); // Track stack depth
+    const [currentStackDepth, setCurrentStackDepth] = useState(100); // Track stack depth
     const [actions, setActions] = useState([]); // Available actions
     const [actionData, setActionData] = useState({}); // Data passed to PokerGrid
     //const [sbAction, setSbAction] = useState(null); // SB Raise or SB Limp for BB response
@@ -57,6 +58,13 @@ function App() {
     //   setActionData(data);
     // };
 
+    const resetState = () => {
+      setCurrentAction('');
+      setVillainPos(null); // Reset villain position
+      //setSbAction(null); // Reset SB action for BB
+      setActionData({}); // Reset action data for grid
+    };
+
     useEffect(() => {
       // Reset action and other related states whenever position or stack depth changes
       resetState(); // Make sure all is reset
@@ -70,12 +78,6 @@ function App() {
       }
     }, [userPos, currentAction, currentStackDepth]);
 
-    const resetState = () => {
-      setCurrentAction('');
-      setVillainPos(null); // Reset villain position
-      //setSbAction(null); // Reset SB action for BB
-      setActionData({}); // Reset action data for grid
-    };
 
   
     const updateAvailableActions = (userPos) => {
@@ -188,8 +190,11 @@ function App() {
     
         console.log(`Final position-based action data:`, posActionData);
         setActionData(posActionData || {});
-      }
-    }, [currentAction, userPos, villainPos, currentStackDepth]);
+  } else {
+    // If any required selection is missing, clear the action data
+    setActionData({});
+  }
+}, [currentAction, userPos, villainPos, currentStackDepth]);
 
 
     const getChartTitle = (userPos, currentAction, currentStackDepth, villainPos = null) => {
@@ -225,52 +230,46 @@ function App() {
 
   return (
     <div className="app-container">
+      <header>
       <h1>Interactive GTO Pre-Flop Poker Chart</h1>
-
-      {/* Flexbox container to position selectors on the right */}
-      <div className="content-container">
-
-         {/* New wrapper to contain both grid and selectors */}
-         <div className="main-content">
-
-       <div className="grid-section">
-        {userPos && currentAction && currentStackDepth && actionData && Object.keys(actionData).length > 0 && (
-        <h2 className="chart-title">
-        {getChartTitle(userPos, currentAction, currentStackDepth, villainPos)}
-        </h2>
-      )}
-     
-      {/* Grid Wrapper */}
-      <div className="grid-wrapper">
-
-      {/* Grid Component */}
-      <div className="grid-container">
-      <PokerGrid actionData={actionData} />
-        </div>
+      <div className="header-buttons">
+        <button>Charts</button>
+        <button>About</button>
+        <button>My Account</button>
       </div>
-    </div>
-
-      {/* Selector Component */}
-      <div className="selector-container">  
-        <PositionSelector onSelect={handlePositionChange} currentPosition={userPos} />
-        <StackDepthSelector onSelect={handleStackDepthChange} currentStackDepth={currentStackDepth} />
-        <ActionSelector 
-              onSelect={handleActionChange} 
-              currentAction={currentAction}
+      </header>
+      <main>
+        <div className="content-container">
+          <div className="left-container">
+            <div className="chart-title">
+            {userPos && currentAction && currentStackDepth && actionData && Object.keys(actionData).length > 0 ? (
+            getChartTitle(userPos, currentAction, currentStackDepth, villainPos)
+            ) : (
+            <span className="placeholder">&nbsp;</span>
+            )}
+          </div>  
+            <PokerGrid actionData={currentAction && userPos && currentStackDepth ? actionData : {}} />
+            <ActionPercentages actionData={currentAction && userPos && currentStackDepth ? actionData : {}} />
+          </div>
+          <div className="selectors-container">  
+            <PositionSelector onSelect={handlePositionChange} currentPosition={userPos} />
+            <StackDepthSelector onSelect={handleStackDepthChange} currentStackDepth={currentStackDepth} />
+            <ActionSelector 
+                  onSelect={handleActionChange} 
+                  currentAction={currentAction}
+                  userPos={userPos}
+                  stackDepth={currentStackDepth}  
+                />
+            <VillainPositionSelector
               userPos={userPos}
-              stackDepth={currentStackDepth}  
+              onSelect={handleVillainPositionChange}
+              currentValue={villainPos}
+              action={currentAction}
+              stackDepth={currentStackDepth}
             />
-        <VillainPositionSelector
-          userPos={userPos}
-          onSelect={handleVillainPositionChange}
-          currentValue={villainPos}
-          action={currentAction}
-          stackDepth={currentStackDepth}
-        />
-   
-          </div> 
+          </div>
         </div>
-      </div>
+      </main>
     </div>
     );
   }

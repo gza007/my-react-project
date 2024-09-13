@@ -34,7 +34,7 @@ const VillainPositionSelector = ({ userPos, onSelect, currentValue, action, stac
   return (
     <div className="selector-container">
       <h3>Select Villain's Position</h3>
-      <div className="button-group">
+      <div className="button-grid">
         {positions.map((position) => (
           <Button
             key={position}

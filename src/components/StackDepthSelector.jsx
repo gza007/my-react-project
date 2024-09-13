@@ -8,7 +8,7 @@ const StackDepthSelector = ({ onSelect, currentStackDepth }) => {
   return (
     <div className="selector-container">
       <h3>Select Stack Depth</h3>
-      <div className="button-group">
+      <div className="button-grid">
         {stackDepths.map((depth) => (
           <Button
             key={depth}
@@ -21,5 +21,24 @@ const StackDepthSelector = ({ onSelect, currentStackDepth }) => {
     </div>
   );
 };
+
+
+// return (
+//   <div className="selector-container">
+//     <h3>Stack Size</h3>
+//     <div className="button-grid">
+//       {stackDepths.map(({ value, label, star }) => (
+//         <Button
+//           key={value}
+//           label={`${label}${star ? ' ★' : ''}`}
+//           onClick={() => onSelect(value)}
+//           isActive={currentStackDepth === value}
+//         />
+//       ))}
+//     </div>
+//     <button className="access-all-button">Access all Stack Sizes for £4.99 per month</button>
+//   </div>
+// );
+// };
 
 export default StackDepthSelector;
