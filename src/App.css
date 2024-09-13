@@ -10,17 +10,24 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   background-color: #2c2c2c;
 }
 
+h1 {
+  font-size: 1.1rem; /* Reduced font size */
+  margin: 0; /* Remove default margin */
+}
+
 .header-buttons button {
-  margin-left: 1rem;
-  padding: 0.5rem 1rem;
+  margin-left: 0.5rem; /* Slightly reduced margin */
+  padding: 0.3rem 0.8rem; /* Reduced padding */
   background-color: #3c3c3c;
   border: none;
   color: white;
   cursor: pointer;
+  font-size: 0.9rem; /* Slightly reduced font size */
+  font-weight: bold;
 }
 
 main {
@@ -30,28 +37,37 @@ main {
   padding: 1rem;
 }
 
+.content-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.left-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
 .chart-title {
   width: 100%;
+  height: 2.5rem; /* Set a fixed height */
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
   background-color: #2c2c2c;
-  padding: 0.5rem;
   border-radius: 4px;
   font-weight: bold;
-}
-
-.content-container {
   display: flex;
-  gap: 2rem;
-}
-
-.left-container {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
+
+.chart-title .placeholder {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
 
 .grid-container {
   flex: 2;
@@ -64,6 +80,10 @@ main {
   gap: 1rem;
 }
 
+.selectors-container h3 {
+  margin-top: 0;
+}
+
 .selector-container {
   background-color: #2c2c2c;
   padding: 1rem;
@@ -73,7 +93,7 @@ main {
 .selector-group {
   background-color: #2c2c2c;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .button-grid {

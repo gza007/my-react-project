@@ -242,8 +242,10 @@ function App() {
         <div className="content-container">
           <div className="left-container">
             <div className="chart-title">
-            {userPos && currentAction && currentStackDepth && actionData && Object.keys(actionData).length > 0 && (
+            {userPos && currentAction && currentStackDepth && actionData && Object.keys(actionData).length > 0 ? (
             getChartTitle(userPos, currentAction, currentStackDepth, villainPos)
+            ) : (
+            <span className="placeholder">&nbsp;</span>
             )}
           </div>  
             <PokerGrid actionData={currentAction && userPos && currentStackDepth ? actionData : {}} />

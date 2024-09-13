@@ -18,3 +18,20 @@
   font-weight: bold;
   font-size: 1.1em;
 }
+
+.raise-action {
+  background-color: hsl(27, 100%, 50%);
+}
+
+.call-action {
+  background-color: rgb(59, 168, 83);
+}
+
+.fold-action {
+  background-color: rgb(111, 111, 111);
+}
+
+.allin-action {
+  background-color: red;
+}
+

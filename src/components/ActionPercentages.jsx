@@ -22,10 +22,29 @@ const ActionPercentages = ({ actionData }) => {
     return null; // Don't render anything if there's no valid data
   }
 
+  const getActionClass = (action) => {
+    switch (action.toLowerCase()) {
+      case 'raise':
+      case 'raise%':
+        return 'raise-action';
+      case 'call':
+      case 'call%':
+        return 'call-action';
+      case 'fold':
+      case 'fold%':
+        return 'fold-action';
+      case 'allin':
+      case 'allin%':
+        return 'allin-action';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="action-percentages">
       {validActions.map(([key, value], index) => (
-        <div key={index} className="action-percentage-box">
+        <div key={index} className={`action-percentage-box ${getActionClass(key)}`}>
           <span className="percentage">{value}</span>
         </div>
       ))}

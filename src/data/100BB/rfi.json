@@ -355,10 +355,10 @@
       },
     "LJ": {
       "action%": {
+        "Allin%": "All-in 24%",
         "Raise%": "2.5bb 56.72%",
-        "Fold%": "Fold 12.3%",
         "Call%": "Call 10%",
-        "Allin%": "All-in 24%"
+        "Fold%": "Fold 12.3%"
       },
         "AA": "r",
         "AKs": "r",
