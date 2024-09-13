@@ -42,7 +42,7 @@ function App() {
     const [currentAction, setCurrentAction] = useState(''); // Track selected action
     const [userPos, setUserPos] = useState(''); // Track user position
     const [villainPos, setVillainPos] = useState(null); // Track villain position
-    const [currentStackDepth, setCurrentStackDepth] = useState(60); // Track stack depth
+    const [currentStackDepth, setCurrentStackDepth] = useState(100); // Track stack depth
     const [actions, setActions] = useState([]); // Available actions
     const [actionData, setActionData] = useState({}); // Data passed to PokerGrid
     //const [sbAction, setSbAction] = useState(null); // SB Raise or SB Limp for BB response
@@ -57,6 +57,13 @@ function App() {
     //   setActionData(data);
     // };
 
+    const resetState = () => {
+      setCurrentAction('');
+      setVillainPos(null); // Reset villain position
+      //setSbAction(null); // Reset SB action for BB
+      setActionData({}); // Reset action data for grid
+    };
+
     useEffect(() => {
       // Reset action and other related states whenever position or stack depth changes
       resetState(); // Make sure all is reset
@@ -70,12 +77,6 @@ function App() {
       }
     }, [userPos, currentAction, currentStackDepth]);
 
-    const resetState = () => {
-      setCurrentAction('');
-      setVillainPos(null); // Reset villain position
-      //setSbAction(null); // Reset SB action for BB
-      setActionData({}); // Reset action data for grid
-    };
 
   
     const updateAvailableActions = (userPos) => {
@@ -188,8 +189,11 @@ function App() {
     
         console.log(`Final position-based action data:`, posActionData);
         setActionData(posActionData || {});
-      }
-    }, [currentAction, userPos, villainPos, currentStackDepth]);
+  } else {
+    // If any required selection is missing, clear the action data
+    setActionData({});
+  }
+}, [currentAction, userPos, villainPos, currentStackDepth]);
 
 
     const getChartTitle = (userPos, currentAction, currentStackDepth, villainPos = null) => {
@@ -245,7 +249,7 @@ function App() {
 
       {/* Grid Component */}
       <div className="grid-container">
-      <PokerGrid actionData={actionData} />
+      <PokerGrid actionData={currentAction && userPos && currentStackDepth ? actionData : {}} />
         </div>
       </div>
     </div>
