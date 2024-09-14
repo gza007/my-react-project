@@ -231,7 +231,11 @@ function App() {
   return (
     <div className="app-container">
       <header>
-      <h1>Interactive GTO Pre-Flop Poker Chart</h1>
+        <div className='app-title-slogan'>
+      <h1>GTO Preflopinator Pro</h1>
+      <div>|</div>
+      <h2>Preflop Precision at Your Fingertips</h2>
+      </div>
       <div className="header-buttons">
         <button>Charts</button>
         <button>About</button>
